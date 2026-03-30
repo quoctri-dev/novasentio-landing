@@ -316,6 +316,29 @@ footer{padding:48px 32px;text-align:center;border-top:1px solid var(--glass-bord
   .trust .inner{flex-direction:column;gap:0}
   .trust-item:not(:last-child)::after{display:none}
 }
+/* ===== CASE STUDIES ===== */
+.cs-sec{background:var(--bg)}
+.cs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(480px,1fr));gap:24px}
+.cs-card{padding:40px 36px;border-radius:var(--r-lg);background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(16px);transition:all 0.4s}
+.cs-card:hover{transform:translateY(-4px);border-color:rgba(184,245,66,0.15)}
+.cs-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin:16px 0 8px;line-height:1.2}
+.cs-context{font-size:0.88rem;color:var(--text2);font-style:italic;margin-bottom:20px}
+.cs-block{padding:16px 20px;border-radius:var(--r-sm);background:var(--surface);margin-bottom:12px;font-size:0.88rem;color:var(--text2);line-height:1.6;display:flex;gap:12px;align-items:flex-start}
+.cs-block.cs-solution{color:var(--text)}
+.cs-bicon{font-size:1.1rem;flex-shrink:0;margin-top:2px}
+.cs-results{display:flex;gap:24px;margin:24px 0;flex-wrap:wrap}
+.cs-metric{text-align:center;min-width:80px}
+.cs-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--lime),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.cs-label{font-size:0.72rem;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:0.06em;margin-top:4px}
+.cs-before{font-size:0.7rem;color:var(--text3);text-decoration:line-through;margin-top:2px}
+.cs-quote{padding:20px 24px;border-radius:var(--r-sm);background:var(--surface);border-left:2px solid var(--lime);margin:20px 0}
+.cs-quote p{font-style:italic;font-weight:300;color:var(--text2);font-size:0.95rem;line-height:1.6;margin-bottom:8px}
+.cs-quote span{font-size:0.82rem;color:var(--text3)}
+.cs-link{display:inline-flex;align-items:center;gap:6px;color:var(--lime);font-size:0.88rem;font-weight:600;text-decoration:none;transition:gap 0.3s}
+.cs-link:hover{gap:10px}
+.cs-more{display:block;text-align:center;margin-top:24px;color:var(--lime);font-weight:600;font-size:0.9rem;text-decoration:none}
+@media(max-width:900px){.cs-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.cs-results{flex-direction:column;align-items:center}}
 </style>
 </head>
 <body>
@@ -495,6 +518,16 @@ footer{padding:48px 32px;text-align:center;border-top:1px solid var(--glass-bord
   </div>
 </section>
 
+<!-- CASE STUDIES -->
+<section id="caseStudies" class="cs-sec">
+  <div class="inner">
+    <div class="stag rv" style="margin:0 auto 20px;text-align:center"><span class="sdot"></span>Results</div>
+    <h2 class="sh rv" style="margin:0 auto 18px;text-align:center">See the impact</h2>
+    <p class="sp rv" style="margin:0 auto 48px;text-align:center">Real results from real projects — with numbers to prove it.</p>
+    <div class="cs-grid rv" id="csGrid"></div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section id="contact" class="cta-sec">
   <div class="cta-glow"></div>
@@ -581,6 +614,24 @@ var PRODUCTS=[
    links:{demo:"https://novasentio-chatbot.streamlit.app",source:"https://github.com/quoctri-dev/nova-chatbot"},status:"live"}
 ];
 
+/* ===== CASE STUDIES DATA ===== */
+var CASE_STUDIES=[
+  {key:"reporly-internal",product:"reporly",
+   title:"From raw CSV to polished report in 90 seconds",
+   context:"Internal use \u2014 automated financial reporting for oil trading analysis",
+   challenge:"Manual Excel analysis took 2-3 hours per report cycle. Multiple data sources, manual chart building, copy-paste into presentations.",
+   solution:"Reporly auto-detects data patterns, generates visualizations, and exports to PDF/PPTX/DOCX. Self-healing: if Gemini API fails, falls back to Claude automatically.",
+   results:[{metric:"90s",label:"Per Report",before:"2-3 hours"},{metric:"18",label:"Modules",before:"Manual process"},{metric:"3",label:"Export Formats",before:"Excel only"}],
+   quote:null,quoteName:null,quoteRole:null,productLink:"reporly",status:"published"},
+  {key:"chatbot-demo",product:"chatbot",
+   title:"AI assistant that never goes down \u2014 2 models, auto-swap",
+   context:"Portfolio demo \u2014 multi-provider chatbot with self-healing architecture",
+   challenge:"Single-provider chatbots break when the API goes down. No fallback, no recovery. Users see error pages.",
+   solution:"Built provider-agnostic chatbot with Gemini primary + Claude fallback. Auto-switches if one fails. Rate limiting + input filtering for security.",
+   results:[{metric:"2+",label:"AI Models",before:"1 only"},{metric:"0",label:"Downtime",before:"Hours when API fails"},{metric:"4-layer",label:"Security",before:"None"}],
+   quote:null,quoteName:null,quoteRole:null,productLink:"chatbot",status:"published"}
+];
+
 var PROBLEMS=[
   {icon:"\ud83d\udcca",quote:"We spend days making reports from raw data",desc:"Your team exports CSV files, opens Excel, builds charts manually, copies into PowerPoint. Every. Single. Week.",result:"\u2192 Automated to under 2 minutes"},
   {icon:"\ud83c\udfaf",quote:"We can\u2019t tell which leads are worth calling",desc:"Your sales team treats every lead the same. Hot prospects get lost in the noise. Follow-ups happen too late.",result:"\u2192 AI scores & prioritizes instantly"},
@@ -614,6 +665,44 @@ var PROBLEMS=[
     card.innerHTML='<div class="sol-content"><div class="sol-tag '+p.tagClass+'">'+p.tag+'</div><h3>'+p.title+'</h3><p>'+p.desc+'</p><ul class="sol-checks">'+hl+'</ul><div class="sol-links">'+lk+'</div></div>'+'<div class="sol-visual"><div class="vis-grid">'+st+'</div><div class="mini-term"><span class="prompt">$</span> '+p.terminal+'<span class="typing">\u258c</span></div></div>';
     cards.appendChild(card);
   });
+})();
+
+/* ===== RENDER CASE STUDIES ===== */
+(function(){
+  var section=document.getElementById('caseStudies');
+  var grid=document.getElementById('csGrid');
+  var published=CASE_STUDIES.filter(function(cs){return cs.status==='published'});
+  if(published.length===0){section.style.display='none';return;}
+  var show=published.slice(0,2);
+  show.forEach(function(cs){
+    var product=PRODUCTS.find(function(p){return p.key===cs.product});
+    var tagClass=product?product.tagClass:'reports';
+    var results=cs.results.map(function(r){
+      return '<div class="cs-metric"><div class="cs-num">'+r.metric+'</div>'
+        +'<div class="cs-label">'+r.label+'</div>'
+        +(r.before?'<div class="cs-before">was: '+r.before+'</div>':'')
+        +'</div>';
+    }).join('');
+    var quote=cs.quote?'<div class="cs-quote"><p>"\u201c'+cs.quote+'\u201d</p>'
+      +'<span>\u2014 '+cs.quoteName+', '+cs.quoteRole+'</span></div>':'';
+    var card=document.createElement('div');
+    card.className='cs-card rv';
+    card.innerHTML='<div class="sol-tag '+tagClass+'">'+(product?product.tag:'')+'</div>'
+      +'<h3 class="cs-title">'+cs.title+'</h3>'
+      +'<p class="cs-context">'+cs.context+'</p>'
+      +'<div class="cs-block cs-challenge"><span class="cs-bicon">\u26a1</span>'+cs.challenge+'</div>'
+      +'<div class="cs-block cs-solution"><span class="cs-bicon">\u2705</span>'+cs.solution+'</div>'
+      +'<div class="cs-results">'+results+'</div>'
+      +quote
+      +'<a href="#solutions" class="cs-link">See '+(product?product.tabLabel:'product')+' \u2192</a>';
+    grid.appendChild(card);
+  });
+  if(published.length>2){
+    var more=document.createElement('a');
+    more.className='cs-more';more.href='#';
+    more.textContent='See all '+published.length+' case studies \u2192';
+    grid.parentNode.appendChild(more);
+  }
 })();
 
 /* ===== SCROLL REVEAL ===== */
