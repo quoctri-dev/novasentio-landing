@@ -185,6 +185,21 @@ body.admin-mode .sol-upload-btn{display:inline-flex}
 .sl-src:hover{border-color:rgba(255,255,255,0.18);color:var(--text)}
 .sol-visual{background:var(--bg3);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:48px;min-height:460px}
 .sol-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(184,245,66,0.04) 0%,transparent 60%),radial-gradient(circle at 70% 70%,rgba(66,215,245,0.03) 0%,transparent 60%)}
+.sol-card[data-product="reporly"] .sol-visual::before{background:radial-gradient(circle at 30% 30%,rgba(184,245,66,0.06) 0%,transparent 60%),radial-gradient(circle at 70% 70%,rgba(184,245,66,0.03) 0%,transparent 60%)}
+.sol-card[data-product="reporly"] .vn{background:linear-gradient(135deg,var(--lime),#d4fc79);-webkit-background-clip:text;background-clip:text}
+.sol-card[data-product="n8n"] .sol-visual::before{background:radial-gradient(circle at 30% 30%,rgba(66,215,245,0.06) 0%,transparent 60%),radial-gradient(circle at 70% 70%,rgba(66,215,245,0.03) 0%,transparent 60%)}
+.sol-card[data-product="n8n"] .vn{background:linear-gradient(135deg,var(--cyan),#96fbc4);-webkit-background-clip:text;background-clip:text}
+.sol-card[data-product="leadscore"] .sol-visual::before{background:radial-gradient(circle at 30% 30%,rgba(167,139,250,0.06) 0%,transparent 60%),radial-gradient(circle at 70% 70%,rgba(167,139,250,0.03) 0%,transparent 60%)}
+.sol-card[data-product="leadscore"] .vn{background:linear-gradient(135deg,var(--violet),#e0c3fc);-webkit-background-clip:text;background-clip:text}
+.sol-card[data-product="apikit"] .sol-visual::before{background:radial-gradient(circle at 30% 30%,rgba(245,161,66,0.06) 0%,transparent 60%),radial-gradient(circle at 70% 70%,rgba(245,161,66,0.03) 0%,transparent 60%)}
+.sol-card[data-product="apikit"] .vn{background:linear-gradient(135deg,var(--warm),#ffd89b);-webkit-background-clip:text;background-clip:text}
+.sol-card[data-product="chatbot"] .sol-visual::before{background:radial-gradient(circle at 30% 30%,rgba(66,215,245,0.06) 0%,transparent 60%),radial-gradient(circle at 70% 70%,rgba(167,139,250,0.04) 0%,transparent 60%)}
+.sol-card[data-product="chatbot"] .vn{background:linear-gradient(135deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text}
+.sol-card[data-product="reporly"] .mini-term{color:var(--lime)}
+.sol-card[data-product="n8n"] .mini-term{color:var(--cyan)}
+.sol-card[data-product="leadscore"] .mini-term{color:var(--violet)}
+.sol-card[data-product="apikit"] .mini-term{color:var(--warm)}
+.sol-card[data-product="chatbot"] .mini-term{color:var(--cyan)}
 .vis-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;position:relative;z-index:1;width:100%;max-width:340px}
 .vis-stat{padding:28px 20px;text-align:center;border-radius:16px;background:rgba(255,255,255,0.03);border:1px solid var(--glass-border);backdrop-filter:blur(8px);transition:all 0.3s}
 .vis-stat:hover{border-color:rgba(184,245,66,0.15);transform:translateY(-2px)}
@@ -207,6 +222,26 @@ body.admin-mode .sol-upload-btn{display:inline-flex}
 @keyframes floatItem{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .stack-chip:hover{border-color:rgba(184,245,66,0.15);color:var(--text);transform:translateY(-10px) scale(1.05)!important}
 .stack-chip .si{font-size:1.1rem}
+
+/* ── ABOUT ── */
+.about-sec{background:var(--bg)}
+.about-grid{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center}
+.about-avatar-wrap{position:relative;width:180px;height:180px}
+.about-avatar{width:180px;height:180px;border-radius:50%;object-fit:cover;border:2px solid var(--glass-border);background:var(--glass);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:3.4rem;font-weight:700;color:var(--lime);overflow:hidden;position:relative}
+.about-avatar img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.about-avatar-glow{position:absolute;inset:-6px;border-radius:50%;background:conic-gradient(var(--lime),var(--cyan),var(--violet),var(--lime));opacity:0.15;filter:blur(12px);animation:aboutGlow 6s linear infinite}
+@keyframes aboutGlow{to{transform:rotate(360deg)}}
+.about-upload-btn{display:none;position:absolute;bottom:4px;right:4px;width:36px;height:36px;border-radius:50%;background:var(--lime);color:var(--bg);border:2px solid var(--bg);align-items:center;justify-content:center;font-size:1rem;z-index:3;transition:transform .3s}
+.about-upload-btn:hover{transform:scale(1.1)}
+body.admin-mode .about-upload-btn{display:flex}
+.about-text h3{font-family:'Playfair Display',serif;font-size:1.8rem;margin-bottom:8px;letter-spacing:-0.01em}
+.about-text .about-role{font-size:1rem;color:var(--lime);font-weight:500;margin-bottom:20px}
+.about-text p{font-size:1rem;color:var(--text2);line-height:1.75;max-width:540px;font-weight:300;margin-bottom:24px}
+.about-chips{display:flex;gap:10px;flex-wrap:wrap}
+.about-chip{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:50px;background:var(--glass);border:1px solid var(--glass-border);font-size:0.82rem;color:var(--text2);font-weight:500;transition:all .3s}
+.about-chip:hover{border-color:rgba(184,245,66,0.15);color:var(--text)}
+.about-chip .ac-icon{color:var(--lime)}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr;text-align:center;gap:32px}.about-avatar-wrap{margin:0 auto}.about-text p{margin:0 auto 24px}.about-chips{justify-content:center}}
 
 /* ── CTA ── */
 .cta-sec{text-align:center;position:relative;overflow:hidden}
@@ -287,6 +322,7 @@ footer{padding:48px 32px;text-align:center;border-top:1px solid var(--glass-bord
     <a href="#problems">Problems</a>
     <a href="#how">Process</a>
     <a href="#solutions">Solutions</a>
+    <a href="#about">About</a>
     <a href="#contact" class="nav-cta">Start a Project</a>
   </div>
 </nav>
@@ -323,10 +359,10 @@ footer{padding:48px 32px;text-align:center;border-top:1px solid var(--glass-bord
 <!-- TRUST -->
 <div class="trust">
   <div class="inner">
-    <div class="trust-item rv"><div class="trust-num" data-count="5">0</div><div class="trust-label">Production Systems</div></div>
-    <div class="trust-item rv rv-d1"><div class="trust-num">99.9%</div><div class="trust-label">Uptime Guarantee</div></div>
+    <div class="trust-item rv"><div class="trust-num" data-count="5">0</div><div class="trust-label">Live Products</div></div>
+    <div class="trust-item rv rv-d1"><div class="trust-num">100%</div><div class="trust-label">Open Source</div></div>
     <div class="trust-item rv rv-d2"><div class="trust-num" data-count="3">0</div><div class="trust-label">AI Providers</div></div>
-    <div class="trust-item rv rv-d3"><div class="trust-num">24h</div><div class="trust-label">Response Time</div></div>
+    <div class="trust-item rv rv-d3"><div class="trust-num" data-count="5">0</div><div class="trust-label">Live Demos</div></div>
   </div>
 </div>
 
@@ -382,6 +418,31 @@ footer{padding:48px 32px;text-align:center;border-top:1px solid var(--glass-bord
       <div class="stack-chip"><span class="si">📊</span>Pandas</div>
       <div class="stack-chip"><span class="si">📐</span>Pydantic</div>
       <div class="stack-chip"><span class="si">📈</span>Plotly</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about-sec">
+  <div class="inner">
+    <div class="stag rv" style="margin:0 auto 20px;text-align:center"><span class="sdot"></span>Who's Behind NoVa</div>
+    <div class="about-grid rv rv-d1">
+      <div class="about-avatar-wrap">
+        <div class="about-avatar-glow"></div>
+        <div class="about-avatar" id="aboutAvatar">QT</div>
+        <button class="about-upload-btn" id="aboutUploadBtn" title="Upload photo">📷</button>
+      </div>
+      <div class="about-text">
+        <h3>Quoc Tri Tran</h3>
+        <div class="about-role">AI Solutions Engineer</div>
+        <p>I build AI systems that solve real business problems — automated reports, lead scoring, chatbots, workflow automation. Every product on this page is open source, live-demoed, and built to run without babysitting. If one AI provider fails, the system recovers on its own.</p>
+        <div class="about-chips">
+          <span class="about-chip"><span class="ac-icon">⚡</span> 5 Live Products</span>
+          <span class="about-chip"><span class="ac-icon">🔄</span> Provider-Agnostic</span>
+          <span class="about-chip"><span class="ac-icon">🛡️</span> Self-Healing Systems</span>
+          <span class="about-chip"><span class="ac-icon">📖</span> 100% Open Source</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -575,6 +636,23 @@ document.querySelectorAll('.sol-tab').forEach(function(tab){
     if(data.project_order)applyProjectOrder(data.project_order);
   }).catch(function(){});
   window.applyProjectOrder=function(order){};
+})();
+
+/* ===== ABOUT AVATAR (upload + KV load) ===== */
+(function(){
+  var avatar=document.getElementById('aboutAvatar'),btn=document.getElementById('aboutUploadBtn');
+  if(!avatar||!btn)return;
+  function loadAvatar(){
+    var img=new Image();img.src='/api/images/avatar?t='+Date.now();
+    img.onload=function(){avatar.innerHTML='';avatar.appendChild(img)};
+  }
+  loadAvatar();
+  btn.addEventListener('click',function(){
+    var fi=document.createElement('input');fi.type='file';fi.accept='image/*';
+    fi.addEventListener('change',function(){if(!fi.files[0])return;var fd=new FormData();fd.append('file',fi.files[0]);fd.append('key','avatar');
+      fetch('/api/upload',{method:'POST',credentials:'same-origin',body:fd}).then(function(r){return r.json()}).then(function(d){if(d.ok){loadAvatar();alert('Avatar updated!')}else alert(d.error||'Upload failed')}).catch(function(){alert('Upload error')});
+    });fi.click();
+  });
 })();
 
 /* ═════════════════════════════════════════
