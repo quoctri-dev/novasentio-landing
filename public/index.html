@@ -307,6 +307,7 @@ footer{padding:48px 32px;text-align:center;border-top:1px solid var(--glass-bord
   .steps-wrap::before{display:none}
   .solutions-nav{flex-wrap:wrap}
   .stack-chip{animation:none!important}
+  .cs-card{transform:none!important}
 }
 @media(max-width:600px){
   nav{padding:14px 18px}
@@ -318,7 +319,7 @@ footer{padding:48px 32px;text-align:center;border-top:1px solid var(--glass-bord
 }
 /* ===== CASE STUDIES ===== */
 .cs-sec{background:var(--bg)}
-.cs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(480px,1fr));gap:24px}
+.cs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(480px,100%),1fr));gap:24px}
 .cs-card{padding:40px 36px;border-radius:var(--r-lg);background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(16px);transition:all 0.4s}
 .cs-card:hover{transform:translateY(-4px);border-color:rgba(184,245,66,0.15)}
 .cs-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin:16px 0 8px;line-height:1.2}
@@ -337,8 +338,8 @@ footer{padding:48px 32px;text-align:center;border-top:1px solid var(--glass-bord
 .cs-link{display:inline-flex;align-items:center;gap:6px;color:var(--lime);font-size:0.88rem;font-weight:600;text-decoration:none;transition:gap 0.3s}
 .cs-link:hover{gap:10px}
 .cs-more{display:block;text-align:center;margin-top:24px;color:var(--lime);font-weight:600;font-size:0.9rem;text-decoration:none}
-@media(max-width:900px){.cs-grid{grid-template-columns:1fr}}
-@media(max-width:600px){.cs-results{flex-direction:column;align-items:center}}
+@media(max-width:900px){.cs-grid{grid-template-columns:1fr}.cs-card{padding:32px 28px}}
+@media(max-width:600px){.cs-results{flex-direction:row;justify-content:center}.cs-card{padding:28px 20px}.cs-title{font-size:1.35rem}.cs-num{font-size:1.6rem}.cs-block{padding:14px 16px;font-size:0.82rem}}
 </style>
 </head>
 <body>
@@ -678,12 +679,15 @@ var PROBLEMS=[
     var product=PRODUCTS.find(function(p){return p.key===cs.product});
     var tagClass=product?product.tagClass:'reports';
     var results=cs.results.map(function(r){
-      return '<div class="cs-metric"><div class="cs-num">'+r.metric+'</div>'
+      var num=parseInt(r.metric);
+      var countAttr=(num===num&&num>0)?' data-count="'+num+'"':'';
+      var initVal=(num===num&&num>0)?'0':r.metric;
+      return '<div class="cs-metric"><div class="cs-num"'+countAttr+'>'+initVal+'</div>'
         +'<div class="cs-label">'+r.label+'</div>'
         +(r.before?'<div class="cs-before">was: '+r.before+'</div>':'')
         +'</div>';
     }).join('');
-    var quote=cs.quote?'<div class="cs-quote"><p>"\u201c'+cs.quote+'\u201d</p>'
+    var quote=cs.quote?'<div class="cs-quote"><p>\u201c'+cs.quote+'\u201d</p>'
       +'<span>\u2014 '+cs.quoteName+', '+cs.quoteRole+'</span></div>':'';
     var card=document.createElement('div');
     card.className='cs-card rv';
@@ -864,6 +868,15 @@ document.querySelectorAll('.btn-p,.btn-s,.nav-cta,.cta-ch,.sl-demo').forEach(fun
     rip.style.width=rip.style.height=sz+'px';rip.style.left=(e.clientX-rect.left-sz/2)+'px';rip.style.top=(e.clientY-rect.top-sz/2)+'px';
     this.appendChild(rip);setTimeout(function(){rip.remove()},600);
   });
+});
+
+/* ── 3D TILT on case study cards ── */
+document.querySelectorAll('.cs-card').forEach(function(card){
+  card.addEventListener('mousemove',function(e){
+    var r=this.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-0.5,y=(e.clientY-r.top)/r.height-0.5;
+    this.style.transform='perspective(1000px) rotateY('+x*2+'deg) rotateX('+(-y*2)+'deg) translateY(-4px)';
+  });
+  card.addEventListener('mouseleave',function(){this.style.transition='transform .4s';this.style.transform='';var s=this;setTimeout(function(){s.style.transition=''},500)});
 });
 
 /* ── 3D TILT on solution cards ── */
